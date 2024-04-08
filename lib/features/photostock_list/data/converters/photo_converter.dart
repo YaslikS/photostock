@@ -1,6 +1,6 @@
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/core/architecture/data/converter/converter.dart';
-import 'package:flutter_template/features/photostock/domain/entities/photo_entity.dart';
+import 'package:flutter_template/features/photostock_list/domain/entities/photo_entity.dart';
 
 /// Converter for [PhotoEntity].
 typedef IPhotoConverter = Converter<PhotoEntity, List<PhotoItem>>;
