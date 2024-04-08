@@ -3,9 +3,9 @@ import 'package:flutter_template/api/service/photo/photo_api.dart';
 import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
 import 'package:flutter_template/core/architecture/domain/entity/request_operation.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
-import 'package:flutter_template/features/photostock/data/converters/photo_converter.dart';
-import 'package:flutter_template/features/photostock/domain/entities/photo_entity.dart';
-import 'package:flutter_template/features/photostock/domain/repositories/i_photos_repository.dart';
+import 'package:flutter_template/features/photostock_list/data/converters/photo_converter.dart';
+import 'package:flutter_template/features/photostock_list/domain/entities/photo_entity.dart';
+import 'package:flutter_template/features/photostock_list/domain/repositories/i_photos_repository.dart';
 
 /// {@template photos_repository.class}
 /// Implementation of [IPhotosRepository].
