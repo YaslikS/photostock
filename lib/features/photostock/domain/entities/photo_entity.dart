@@ -3,14 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'photo_entity.freezed.dart';
 
-/// {@template ip_entity.class}
-/// IP address.
+/// {@template photo_entity.class}
+/// Object of the list of items in the list of photos.
 /// {@endtemplate}
 @freezed
 class PhotoEntity with _$PhotoEntity {
-  /// {@macro ip_entity.class}
+  /// {@macro photo_entity.class}
   const factory PhotoEntity({
-    /// IP address.
+    /// list of photos.
     required List<PhotoItem> photos,
   }) = _PhotoEntity;
 }

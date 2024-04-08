@@ -4,15 +4,24 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'photo_item.g.dart';
 
+/// {@template photo_item.class}
+/// DTO for list item.
+/// {@endtemplate}
 @JsonSerializable(explicitToJson: true)
 class PhotoItem {
-  String color;
-  String blur_hash;
-  Urls urls;
-  int likes;
-  User user;
+  /// color
+  final String color;
+  /// hash for blur
+  final String blur_hash;
+  /// link to the photo
+  final Urls urls;
+  /// likes for photos
+  final int likes;
+  /// The user who posted the photo
+  final User user;
 
-  PhotoItem({
+  /// {@macro photo_item.class}
+  const PhotoItem({
     required this.color,
     required this.blur_hash,
     required this.urls,
@@ -20,11 +29,11 @@ class PhotoItem {
     required this.user,
   });
 
-  // From Json
+  /// Get DTO object from json.
   factory PhotoItem.fromJson(Map<String, dynamic> json) =>
       _$PhotoItemFromJson(json);
 
-  // ToJson
+  /// Convert a DTO object to json.
   Map<String, dynamic> toJson() => _$PhotoItemToJson(this);
 }
 

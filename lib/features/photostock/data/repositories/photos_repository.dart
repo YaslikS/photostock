@@ -7,14 +7,14 @@ import 'package:flutter_template/features/photostock/data/converters/photo_conve
 import 'package:flutter_template/features/photostock/domain/entities/photo_entity.dart';
 import 'package:flutter_template/features/photostock/domain/repositories/i_photos_repository.dart';
 
-// / {@template feature_example_repository.class}
-// / Implementation of [IFeatureExampleRepository].
-// / {@endtemplate}
+/// {@template photos_repository.class}
+/// Implementation of [IPhotosRepository].
+/// {@endtemplate}
 final class PhotosRepository implements IPhotosRepository {
   final PhotoApi _photoApi;
   final IPhotoConverter _photoConverter;
 
-  /// {@macro feature_example_repository.class}
+  /// {@macro photos_repository.class}
   const PhotosRepository({
     required PhotoApi photoApi,
     required IPhotoConverter photoConverter,

@@ -2,16 +2,22 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'urls.g.dart';
 
+/// {@template urls.class}
+/// DTO for link to the photo.
+/// {@endtemplate}
 @JsonSerializable(explicitToJson: true)
 class Urls {
-  String regular;
+  /// link
+  final String regular;
 
-  Urls({required this.regular});
+  /// {@macro urls.class}
+  const Urls({
+    required this.regular,
+  });
 
-  // From Json
-  factory Urls.fromJson(Map<String, dynamic> json) =>
-      _$UrlsFromJson(json);
+  /// Get DTO object from json.
+  factory Urls.fromJson(Map<String, dynamic> json) => _$UrlsFromJson(json);
 
-  // ToJson
+  /// Convert a DTO object to json.
   Map<String, dynamic> toJson() => _$UrlsToJson(this);
 }
