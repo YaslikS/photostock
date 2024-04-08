@@ -20,18 +20,21 @@ mixin _$IpEntity {
   String get ip => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $IpEntityCopyWith<IpEntity> get copyWith => throw _privateConstructorUsedError;
+  $IpEntityCopyWith<IpEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $IpEntityCopyWith<$Res> {
-  factory $IpEntityCopyWith(IpEntity value, $Res Function(IpEntity) then) = _$IpEntityCopyWithImpl<$Res, IpEntity>;
+  factory $IpEntityCopyWith(IpEntity value, $Res Function(IpEntity) then) =
+      _$IpEntityCopyWithImpl<$Res, IpEntity>;
   @useResult
   $Res call({String ip});
 }
 
 /// @nodoc
-class _$IpEntityCopyWithImpl<$Res, $Val extends IpEntity> implements $IpEntityCopyWith<$Res> {
+class _$IpEntityCopyWithImpl<$Res, $Val extends IpEntity>
+    implements $IpEntityCopyWith<$Res> {
   _$IpEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -54,8 +57,10 @@ class _$IpEntityCopyWithImpl<$Res, $Val extends IpEntity> implements $IpEntityCo
 }
 
 /// @nodoc
-abstract class _$$IpEntityImplCopyWith<$Res> implements $IpEntityCopyWith<$Res> {
-  factory _$$IpEntityImplCopyWith(_$IpEntityImpl value, $Res Function(_$IpEntityImpl) then) =
+abstract class _$$IpEntityImplCopyWith<$Res>
+    implements $IpEntityCopyWith<$Res> {
+  factory _$$IpEntityImplCopyWith(
+          _$IpEntityImpl value, $Res Function(_$IpEntityImpl) then) =
       __$$IpEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -63,9 +68,12 @@ abstract class _$$IpEntityImplCopyWith<$Res> implements $IpEntityCopyWith<$Res> 
 }
 
 /// @nodoc
-class __$$IpEntityImplCopyWithImpl<$Res> extends _$IpEntityCopyWithImpl<$Res, _$IpEntityImpl>
+class __$$IpEntityImplCopyWithImpl<$Res>
+    extends _$IpEntityCopyWithImpl<$Res, _$IpEntityImpl>
     implements _$$IpEntityImplCopyWith<$Res> {
-  __$$IpEntityImplCopyWithImpl(_$IpEntityImpl _value, $Res Function(_$IpEntityImpl) _then) : super(_value, _then);
+  __$$IpEntityImplCopyWithImpl(
+      _$IpEntityImpl _value, $Res Function(_$IpEntityImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -98,7 +106,9 @@ class _$IpEntityImpl implements _IpEntity {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$IpEntityImpl && (identical(other.ip, ip) || other.ip == ip));
+        (other.runtimeType == runtimeType &&
+            other is _$IpEntityImpl &&
+            (identical(other.ip, ip) || other.ip == ip));
   }
 
   @override
@@ -120,5 +130,6 @@ abstract class _IpEntity implements IpEntity {
   String get ip;
   @override
   @JsonKey(ignore: true)
-  _$$IpEntityImplCopyWith<_$IpEntityImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$IpEntityImplCopyWith<_$IpEntityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
