@@ -4,6 +4,8 @@ import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_flow.
 import 'package:flutter_template/features/feature_example/presentation/feature_example_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 
+import '../../photostock_list/presentation/photo_list_flow.dart';
+
 part 'app_router.gr.dart';
 
 /// {@template router.class}
@@ -19,9 +21,14 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
+          page: PhotoListRouter.page,
+          path: AppRoutePaths.photoListPath,
+          initial: true,
+        ),
+        AutoRoute(
           page: DebugRouter.page,
           path: AppRoutePaths.debugPath,
-          initial: true,
+          // initial: true,
         ),
         AutoRoute(
           page: UiKitRouter.page,

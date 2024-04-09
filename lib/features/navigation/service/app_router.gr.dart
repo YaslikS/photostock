@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const FeatureExampleFlow()),
       );
     },
+    PhotoListRouter.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const PhotoListFlow()),
+      );
+    },
     UiKitRouter.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -60,6 +66,20 @@ class FeatureExampleRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FeatureExampleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PhotoListFlow]
+class PhotoListRouter extends PageRouteInfo<void> {
+  const PhotoListRouter({List<PageRouteInfo>? children})
+      : super(
+          PhotoListRouter.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PhotoListRouter';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

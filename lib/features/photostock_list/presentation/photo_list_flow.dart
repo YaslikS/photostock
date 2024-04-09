@@ -11,9 +11,9 @@ import 'package:flutter_template/features/photostock_list/presentation/photo_lis
 /// Entry of debug feature.
 /// {@endtemplate}
 @RoutePage(name: AppRouteNames.photoListScreen)
-class DebugFlow extends StatelessWidget implements AutoRouteWrapper {
+class PhotoListFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro debug_flow.class}
-  const DebugFlow({super.key});
+  const PhotoListFlow({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {

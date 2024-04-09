@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PhotoEntity {
-  /// IP address.
+  /// list of photos.
   List<PhotoItem> get photos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -96,10 +96,10 @@ class _$PhotoEntityImpl implements _PhotoEntity {
   const _$PhotoEntityImpl({required final List<PhotoItem> photos})
       : _photos = photos;
 
-  /// IP address.
+  /// list of photos.
   final List<PhotoItem> _photos;
 
-  /// IP address.
+  /// list of photos.
   @override
   List<PhotoItem> get photos {
     if (_photos is EqualUnmodifiableListView) return _photos;
@@ -137,7 +137,7 @@ abstract class _PhotoEntity implements PhotoEntity {
 
   @override
 
-  /// IP address.
+  /// list of photos.
   List<PhotoItem> get photos;
   @override
   @JsonKey(ignore: true)
