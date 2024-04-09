@@ -1,5 +1,5 @@
 name: flutter_template
-version: "0.0.1-dev.0"
+version: "0.0.2-dev.0"
 description: a Flutter template project for development.
 publish_to: none
 
@@ -51,9 +51,8 @@ dev_dependencies:
   surf_lint_rules: 3.0.0
 
 environment:
-    sdk: '>=3.2.5 <4.0.0'
-    flutter: 3.19.0
-
+  sdk: ">=3.2.5 <4.0.0"
+  flutter: 3.19.0
 
 flutter:
   uses-material-design: true
