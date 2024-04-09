@@ -3,10 +3,10 @@
 /// Server url.
 enum Url {
   /// Dev url.
-  dev('https://example.com/'),
+  dev('https://api.unsplash.com/photos/?client_id='),
 
   /// Prod url.
-  prod('https://example.com/');
+  prod('https://api.unsplash.com/photos/?client_id=');
 
   /// Url value.
   final String value;
