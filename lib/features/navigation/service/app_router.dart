@@ -3,8 +3,7 @@ import 'package:flutter_template/features/debug/presentation/debug/debug_flow.da
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_flow.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
-
-import '../../photostock_list/presentation/photo_list_flow.dart';
+import 'package:flutter_template/features/photostock_list/presentation/photo_list_flow.dart';
 
 part 'app_router.gr.dart';
 

@@ -8,7 +8,7 @@ import 'package:flutter_template/features/photostock_list/di/photo_list_scope.da
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
 
 /// {@template photo_list_flow.class}
-/// Entry of debug feature.
+/// Entry of photo list feature.
 /// {@endtemplate}
 @RoutePage(name: AppRouteNames.photoListScreen)
 class PhotoListFlow extends StatelessWidget implements AutoRouteWrapper {
