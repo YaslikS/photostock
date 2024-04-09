@@ -6,6 +6,12 @@
 /// static const String screenName = 'screenNameRoute';
 /// ```
 abstract class AppRouteNames {
+  /// PhotoList route name.
+  static const photoListScreen = 'photoListRouter';
+
+  /// PhotoDetail route name.
+  static const photoDetailScreen = 'photoDetailRouter';
+
   /// TempScreen route name.
   static const tempScreen = 'tempRouter';
 
