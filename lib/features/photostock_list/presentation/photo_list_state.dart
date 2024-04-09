@@ -1,3 +1,5 @@
+import 'package:flutter_template/features/photostock_list/domain/entities/photo_entity.dart';
+
 /// The state of feature example screen.
 sealed class PhotoListState {
   const PhotoListState();
@@ -24,7 +26,7 @@ class PhotoListStateLoading extends PhotoListState {
 /// {@endtemplate}
 class PhotoListStateLoaded extends PhotoListState {
   /// object with list of photos.
-  final String photoEntity;  //  TODO: change type to PhotoEntity after merge with SI-8578
+  final PhotoEntity photoEntity;
 
   /// {@macro photo_list_state_loaded.class}
   const PhotoListStateLoaded(this.photoEntity);
