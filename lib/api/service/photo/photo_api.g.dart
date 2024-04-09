@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ip_api.dart';
+part of 'photo_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'ip_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _IpApi implements IpApi {
-  _IpApi(
+class _PhotoApi implements PhotoApi {
+  _PhotoApi(
     this._dio, {
     this.baseUrl,
   });
@@ -19,13 +19,13 @@ class _IpApi implements IpApi {
   String? baseUrl;
 
   @override
-  Future<IpDto> getIp([String format = 'json']) async {
+  Future<List<PhotoItem>> getPhoto([String format = 'json']) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'format': format};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<IpDto>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<PhotoItem>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,9 @@ class _IpApi implements IpApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = IpDto.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => PhotoItem.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
