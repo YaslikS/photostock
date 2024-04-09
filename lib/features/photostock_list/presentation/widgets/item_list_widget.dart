@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/utils/extentions/hex_color_to_color.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
@@ -12,7 +11,8 @@ import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 class ItemListWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
   const ItemListWidget({
-    required this.photoItem, super.key,
+    required this.photoItem,
+    super.key,
   });
 
   /// one item in List of photos
@@ -37,13 +37,17 @@ class ItemListWidget extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(AppSizes.double16)),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(photoItem.urls.regular),
-                  )
+              ClipRRect(
+                borderRadius: BorderRadius.circular(AppSizes.double16),
+                child: Image.network(
+                  height: double.infinity,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  photoItem.urls.regular,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(child: BlurHash(hash: photoItem.blur_hash));
+                  },
                 ),
               ),
               Padding(

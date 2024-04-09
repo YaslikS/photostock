@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/item_list_widget.dart';
 
@@ -18,8 +19,8 @@ class PhotosListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(slivers: [
+    return CustomScrollView(
+      slivers: [
         const CupertinoSliverNavigationBar(
           backgroundColor: Colors.white,
           largeTitle: Text("Photos"),
@@ -38,7 +39,8 @@ class PhotosListWidget extends StatelessWidget {
             return ItemListWidget(photoItem: photosList[i]);
           },
         ),
-      ]),
+
+      ],
     );
   }
 }

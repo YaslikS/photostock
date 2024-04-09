@@ -12,21 +12,23 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   const PhotoListScreen({
     super.key,
     WidgetModelFactory wmFactory = defaultFeatureExampleWMFactory,
-  }) : super(wmFactory);  
+  }) : super(wmFactory);
 
   @override
   Widget build(IPhotoListWM wm) {
     const PhotoListStateInitial();
 
-    return ValueListenableBuilder<PhotoListState>(
-      valueListenable: wm.state,
-      builder: (_, state, __) => switch (state) {
-        PhotoListStateInitial _ => const SizedBox.shrink(),
-        PhotoListStateLoading _ => const CircularProgressIndicator(),
-        PhotoListStateLoaded(:final photoEntity) =>
-          PhotosListWidget(photosList: photoEntity.photos),
-        PhotoListStateError _ => Text(wm.l10n.featureExampleFailedLoadIpMessage),
-      },
+    return Scaffold(
+      body: ValueListenableBuilder<PhotoListState>(
+        valueListenable: wm.state,
+        builder: (_, state, __) => switch (state) {
+          PhotoListStateInitial _ => const Center(child: SizedBox.shrink()),
+          PhotoListStateLoading _ => const Center(child: CircularProgressIndicator()),
+          PhotoListStateLoaded(:final photoEntity) =>
+            PhotosListWidget(photosList: photoEntity.photos),
+          PhotoListStateError _ => Text(wm.l10n.featureExampleFailedLoadIpMessage),
+        },
+      ),
     );
   }
 }
