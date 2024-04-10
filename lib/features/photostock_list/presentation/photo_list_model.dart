@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_template/common/utils/extentions/value_notifier_x.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
+import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/features/photostock_list/domain/repositories/i_photos_repository.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';

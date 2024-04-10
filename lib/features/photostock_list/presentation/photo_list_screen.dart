@@ -30,6 +30,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
             ),
           PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
               photosList: photoEntity.photos,
+              openDetailPhotoScreen: wm.openDetailPhotoScreen,
             ),
           PhotoListStateError _ => Text(
               wm.l10n.featureExampleFailedLoadIpMessage,

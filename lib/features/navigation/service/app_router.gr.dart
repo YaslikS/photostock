@@ -21,6 +21,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DebugFlow()),
       );
     },
+    PhotoDetailRouter.name: (routeData) {
+      final args = routeData.argsAs<PhotoDetailRouterArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(
+            child: DetailPhotoFlow(
+          photoItem: args.photoItem,
+          key: args.key,
+        )),
+      );
+    },
     FeatureExampleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -54,6 +65,44 @@ class DebugRouter extends PageRouteInfo<void> {
   static const String name = 'DebugRouter';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DetailPhotoFlow]
+class PhotoDetailRouter extends PageRouteInfo<PhotoDetailRouterArgs> {
+  PhotoDetailRouter({
+    required PhotoItem photoItem,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PhotoDetailRouter.name,
+          args: PhotoDetailRouterArgs(
+            photoItem: photoItem,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PhotoDetailRouter';
+
+  static const PageInfo<PhotoDetailRouterArgs> page =
+      PageInfo<PhotoDetailRouterArgs>(name);
+}
+
+class PhotoDetailRouterArgs {
+  const PhotoDetailRouterArgs({
+    required this.photoItem,
+    this.key,
+  });
+
+  final PhotoItem photoItem;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PhotoDetailRouterArgs{photoItem: $photoItem, key: $key}';
+  }
 }
 
 /// generated route for

@@ -10,8 +10,12 @@ class PhotosListWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
   const PhotosListWidget({
     required this.photosList,
+    required this.openDetailPhotoScreen,
     super.key,
   });
+
+  /// TODO: ОПИСАНИЕ
+  final ValueChanged<PhotoItem> openDetailPhotoScreen;
 
   /// List of photos
   final List<PhotoItem> photosList;
@@ -35,7 +39,10 @@ class PhotosListWidget extends StatelessWidget {
             crossAxisCount: 2,
           ),
           itemBuilder: (context, i) {
-            return PhotoListItemWidget(photoItem: photosList[i]);
+            return PhotoListItemWidget(
+              photoItem: photosList[i],
+              openDetailPhotoScreen: openDetailPhotoScreen,
+            );
           },
         ),
       ],
