@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +45,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   void initWidgetModel() {
-    unawaited(model.loadPhotos());
+    model.loadPhotos();
     super.initWidgetModel();
   }
 }

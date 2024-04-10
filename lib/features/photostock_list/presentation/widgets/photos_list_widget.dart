@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
 
@@ -39,7 +38,6 @@ class PhotosListWidget extends StatelessWidget {
             return PhotoListItemWidget(photoItem: photosList[i]);
           },
         ),
-
       ],
     );
   }
