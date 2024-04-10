@@ -7,6 +7,9 @@
 /// ```
 abstract class AppRoutePaths {
   /// Path to debug screen.
+  static const photoListPath = '/photo_list';
+
+  /// Path to debug screen.
   static const debugPath = '/debug';
 
   /// Path to ui kit screen.
