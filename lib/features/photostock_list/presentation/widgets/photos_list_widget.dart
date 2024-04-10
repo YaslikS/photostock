@@ -36,7 +36,7 @@ class PhotosListWidget extends StatelessWidget {
             crossAxisCount: 2,
           ),
           itemBuilder: (context, i) {
-            return ItemListWidget(photoItem: photosList[i]);
+            return PhotoListItemWidget(photoItem: photosList[i]);
           },
         ),
 

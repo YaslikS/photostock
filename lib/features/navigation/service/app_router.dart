@@ -27,7 +27,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: DebugRouter.page,
           path: AppRoutePaths.debugPath,
-          // initial: true,
         ),
         AutoRoute(
           page: UiKitRouter.page,

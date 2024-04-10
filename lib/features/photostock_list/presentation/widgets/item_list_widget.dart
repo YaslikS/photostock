@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
@@ -8,9 +9,9 @@ import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 /// ItemListWidget.
 /// Widget for one item in List of photos
 /// {@endtemplate}
-class ItemListWidget extends StatelessWidget {
+class PhotoListItemWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
-  const ItemListWidget({
+  const PhotoListItemWidget({
     required this.photoItem,
     super.key,
   });
@@ -46,16 +47,18 @@ class ItemListWidget extends StatelessWidget {
                   photoItem.urls.regular,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(child: BlurHash(hash: photoItem.blur_hash));
+                    return Center(
+                      child: BlurHash(hash: photoItem.blur_hash),
+                    );
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(AppSizes.double12),
+              Positioned(
+                bottom: AppSizes.double12,
+                left: AppSizes.double12,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Spacer(),
                     Text(
                       photoItem.user.username,
                       style: theme.textTheme.labelLarge?.copyWith(
