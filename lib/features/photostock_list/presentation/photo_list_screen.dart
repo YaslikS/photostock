@@ -22,12 +22,18 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
       body: ValueListenableBuilder<PhotoListState>(
         valueListenable: wm.state,
         builder: (_, state, __) => switch (state) {
-          PhotoListStateInitial _ => const Center(child: SizedBox.shrink()),
-          PhotoListStateLoading _ => const Center(child: CircularProgressIndicator()),
+          PhotoListStateInitial _ => const Center(
+              child: SizedBox.shrink(),
+            ),
+          PhotoListStateLoading _ => const Center(
+              child: CircularProgressIndicator(),
+            ),
           PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
               photosList: photoEntity.photos,
             ),
-          PhotoListStateError _ => Text(wm.l10n.featureExampleFailedLoadIpMessage),
+          PhotoListStateError _ => Text(
+              wm.l10n.featureExampleFailedLoadIpMessage,
+            ),
         },
       ),
     );
