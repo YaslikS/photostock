@@ -1,5 +1,3 @@
-import 'package:flutter_template/features/photostock_list/domain/entities/photo_entity.dart';
-
 /// The state of detail photo screen.
 sealed class DetailPhotoState {
   const DetailPhotoState();
@@ -25,7 +23,6 @@ class DetailPhotoStateLoading extends DetailPhotoState {
 /// some info is loaded.
 /// {@endtemplate}
 class DetailPhotoStateLoaded extends DetailPhotoState {
-
   /// {@macro detail_photo_state_loaded.class}
   const DetailPhotoStateLoaded();
 }

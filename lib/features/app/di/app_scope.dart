@@ -1,5 +1,6 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';

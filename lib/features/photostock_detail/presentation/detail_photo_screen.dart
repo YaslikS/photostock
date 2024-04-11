@@ -21,8 +21,6 @@ class DetailPhotoScreen extends ElementaryWidget<IDetailPhotoWM> {
 
   @override
   Widget build(IDetailPhotoWM wm) {
-    // const DetailPhotoStateInitial();
-    // final theme = Theme.of(wm.);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -34,7 +32,7 @@ class DetailPhotoScreen extends ElementaryWidget<IDetailPhotoWM> {
           ClipRRect(
             borderRadius: BorderRadius.circular(AppSizes.double20),
             child: SizedBox(
-              height: 300,
+              height: AppSizes.double400,
               child: Image.network(
                 photoItem.urls.regular,
                 fit: BoxFit.cover,
@@ -56,14 +54,14 @@ class DetailPhotoScreen extends ElementaryWidget<IDetailPhotoWM> {
               children: [
                 Text(
                   photoItem.user.username,
-                  style: TextStyle(
-                    fontSize: 30,
+                  style: const TextStyle(
+                    fontSize: AppSizes.double32,
                   ),
                 ),
                 Text(
                   '${photoItem.likes} likes',
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: const TextStyle(
+                    fontSize: AppSizes.double20,
                   ),
                 ),
               ],

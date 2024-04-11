@@ -17,7 +17,6 @@ DetailPhotoWM defaultDetailPhotoWMFactory(BuildContext context) {
 
   return DetailPhotoWM(
     DetailPhotoModel(
-      // repository: scope.repository,
       logWriter: appScope.logger,
     ),
   );

@@ -9,20 +9,12 @@ import 'package:provider/provider.dart';
 /// {@endtemplate}
 final class DetailPhotoScope extends DisposableObject implements IDetailPhotoScope {
   @override
-  // final IPhotosRepository repository;
 
   /// Factory constructor for [IDetailPhotoScope].
   factory DetailPhotoScope.create(BuildContext context) {
     final appScope = context.read<IAppScope>();
-    // final photoUrl = appScope.appConfig.url.value;
-    // final accessKey = appScope.appConfig.accessKey;
 
-    return DetailPhotoScope(
-      // PhotosRepository(
-      //   photoApi: PhotoApi(appScope.dio, baseUrl: photoUrl + accessKey),  // TODO: YaslikS - remove accessKey from url
-      //   photoConverter: const PhotoConverter(),
-      // ),
-    );
+    return DetailPhotoScope();
   }
 
   /// {@macro detail_photo_scope.class}
@@ -30,7 +22,4 @@ final class DetailPhotoScope extends DisposableObject implements IDetailPhotoSco
 }
 
 /// Scope dependencies of the Photostock Detail feature.
-abstract interface class IDetailPhotoScope implements IDisposableObject {
-  /// PhotosRepository.
-  // IPhotosRepository get repository;
-}
+abstract interface class IDetailPhotoScope implements IDisposableObject {}
