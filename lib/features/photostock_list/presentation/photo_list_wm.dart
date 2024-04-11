@@ -1,6 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_template/features/photostock_list/presentation/photo_lis
 import 'package:provider/provider.dart';
 
 /// DI factory for [PhotoListWM].
-PhotoListWM defaultFeatureExampleWMFactory(BuildContext context) {
+PhotoListWM photoListWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scope = context.read<IPhotoListScope>();
 
@@ -21,6 +22,7 @@ PhotoListWM defaultFeatureExampleWMFactory(BuildContext context) {
       logWriter: appScope.logger,
     ),
     1,
+    [],
   );
 }
 
@@ -31,8 +33,11 @@ abstract interface class IPhotoListWM
   /// State of screen.
   ValueListenable<PhotoListState> get state;
 
-  /// TODO: заполнить!!!
+  /// updating list
   void listNeedsUpdate();
+
+  /// update list of photos
+  void updateList(List<PhotoItem> photos);
 }
 
 /// {@template photo_list_wm.class}
@@ -44,36 +49,34 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   @override
   ValueListenable<PhotoListState> get state => model.state;
 
+  /// current page
   int page;
+
+  /// current list of photos
+  List<PhotoItem> currentPhotos;
 
   /// {@macro photo_list_wm.class}
   PhotoListWM(
     super._model,
     this.page,
+    this.currentPhotos,
   );
 
   @override
   Future<void> listNeedsUpdate() async {
-    if (kDebugMode) {
-      print("page $page");
-    }
     await model.loadPhotos(page);
     ++page;
-    if (kDebugMode) {
-      print("page $page");
-    }
   }
 
   @override
   void initWidgetModel() {
     model.loadPhotos(page);
-    if (kDebugMode) {
-      print("page $page");
-    }
     ++page;
-    if (kDebugMode) {
-      print("page $page");
-    }
     super.initWidgetModel();
+  }
+
+  @override
+  void updateList(List<PhotoItem> photos) {
+    currentPhotos.addAll(photos);
   }
 }

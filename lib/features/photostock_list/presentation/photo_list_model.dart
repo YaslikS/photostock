@@ -33,7 +33,6 @@ final class PhotoListModel extends BaseModel {
   Future<void> loadPhotos(int page) async {
     _state.emit(const PhotoListStateLoading());
 
-    // final result = await makeCall(_repository.getPhotos(page));
     final result = await makeCall(() => _repository.getPhotos(page));
 
     switch (result) {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
 
 /// {@template photos_list_widget.class}
@@ -15,7 +15,7 @@ class PhotosListWidget extends StatelessWidget {
     super.key,
   });
 
-  /// TODO: ОПИСАНИЕ
+  /// update list of photos
   final VoidCallback listNeedsUpdate;
 
   /// List of photos
@@ -27,10 +27,6 @@ class PhotosListWidget extends StatelessWidget {
       onNotification: (notification) {
         if (notification is ScrollEndNotification &&
             notification.metrics.pixels == notification.metrics.maxScrollExtent) {
-          // _data.addAll(List.generate(10, (index) => _data.length + index));
-          if (kDebugMode) {
-            print("listNeedsUpdate");
-          }
           listNeedsUpdate();
         }
         return false;
@@ -47,19 +43,21 @@ class PhotosListWidget extends StatelessWidget {
             ),
           ),
           SliverGrid.builder(
-            itemCount: photosList.length + 1,
+            itemCount: photosList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) {
-              if (i < photosList.length) {
-                return PhotoListItemWidget(photoItem: photosList[i]);
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+              return PhotoListItemWidget(photoItem: photosList[i]);
             },
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(AppSizes.double20),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ),
         ],
       ),

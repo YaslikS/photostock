@@ -11,7 +11,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   /// {@macro photo_list_screen.class}
   const PhotoListScreen({
     super.key,
-    WidgetModelFactory wmFactory = defaultFeatureExampleWMFactory,
+    WidgetModelFactory wmFactory = photoListWMFactory,
   }) : super(wmFactory);
 
   @override
