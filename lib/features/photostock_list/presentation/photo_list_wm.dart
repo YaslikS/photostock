@@ -20,6 +20,7 @@ PhotoListWM defaultFeatureExampleWMFactory(BuildContext context) {
       repository: scope.repository,
       logWriter: appScope.logger,
     ),
+    1,
   );
 }
 
@@ -29,6 +30,9 @@ abstract interface class IPhotoListWM
     implements IWidgetModel {
   /// State of screen.
   ValueListenable<PhotoListState> get state;
+
+  /// TODO: заполнить!!!
+  void listNeedsUpdate();
 }
 
 /// {@template photo_list_wm.class}
@@ -40,12 +44,29 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   @override
   ValueListenable<PhotoListState> get state => model.state;
 
+  int page;
+
   /// {@macro photo_list_wm.class}
-  PhotoListWM(super._model);
+  PhotoListWM(
+    super._model,
+    this.page,
+  );
+
+  @override
+  void listNeedsUpdate() {
+    model.loadPhotos(page);
+  }
 
   @override
   void initWidgetModel() {
-    model.loadPhotos(1);
+    model.loadPhotos(page);
+    if (kDebugMode) {
+      print("page $page");
+    }
+    ++page;
+    if (kDebugMode) {
+      print("page $page");
+    }
     super.initWidgetModel();
   }
 }

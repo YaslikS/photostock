@@ -29,14 +29,30 @@ class PhotosListWidget extends StatelessWidget {
             ),
           ),
         ),
-        SliverGrid.builder(
-          itemCount: photosList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemBuilder: (context, i) {
-            return PhotoListItemWidget(photoItem: photosList[i]);
+        NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification is ScrollEndNotification &&
+                notification.metrics.extentAfter == 0) {
+              // _data.addAll(List.generate(10, (index) => _data.length + index));
+
+            }
+            return false;
           },
+          child: SliverGrid.builder(
+            itemCount: photosList.length + 1,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (context, i) {
+              if (i < photosList.length) {
+                return PhotoListItemWidget(photoItem: photosList[i]);
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
         ),
       ],
     );
