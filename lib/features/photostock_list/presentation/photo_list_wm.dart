@@ -45,7 +45,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   void initWidgetModel() {
-    model.loadPhotos();
+    model.loadPhotos(1);
     super.initWidgetModel();
   }
 }

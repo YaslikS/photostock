@@ -22,9 +22,9 @@ final class PhotosRepository implements IPhotosRepository {
         _photoConverter = photoConverter;
 
   @override
-  RequestOperation<PhotoEntity> getPhotos() async {
+  RequestOperation<PhotoEntity> getPhotos(int page) async {
     try {
-      final result = await _photoApi.getPhoto();
+      final result = await _photoApi.getPhoto('json', page);
 
       return Result.ok(_photoConverter.convert(result));
     } on DioException catch (error, s) {
