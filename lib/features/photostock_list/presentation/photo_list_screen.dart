@@ -29,6 +29,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
               child: CircularProgressIndicator(),
             ),
           PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
+              listNeedsUpdate: wm.listNeedsUpdate,
               photosList: photoEntity.photos,
             ),
           PhotoListStateError _ => Text(

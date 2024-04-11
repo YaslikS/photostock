@@ -53,8 +53,15 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   );
 
   @override
-  void listNeedsUpdate() {
-    model.loadPhotos(page);
+  Future<void> listNeedsUpdate() async {
+    if (kDebugMode) {
+      print("page $page");
+    }
+    await model.loadPhotos(page);
+    ++page;
+    if (kDebugMode) {
+      print("page $page");
+    }
   }
 
   @override
