@@ -5,6 +5,7 @@ import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_constants.dart';
 import 'package:flutter_template/features/photostock_list/di/photo_list_scope.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_model.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
@@ -24,7 +25,7 @@ PhotoListWM photoListWMFactory(BuildContext context) {
       repository: scope.repository,
       logWriter: appScope.logger,
     ),
-    1,
+    AppConstants.int1,
     [],
     scaffoldMessenger: scaffoldMessenger,
   );
@@ -92,6 +93,6 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   void _showErrorAppSnackBar() {
     final _ = _scaffoldMessenger
-        .showSnackBar(SnackBar(content: Text("Upload failure")));
+        .showSnackBar(SnackBar(content: Text(l10n.photoListFailedLoadListPhotoMessage)));
   }
 }

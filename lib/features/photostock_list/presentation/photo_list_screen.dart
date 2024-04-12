@@ -32,9 +32,11 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
           PhotoListStateLoaded(:final photoEntity) => wm.updateList(
               photoEntity.photos,
             ),
-          PhotoListStateError _ => Text(
-              wm.l10n.featureExampleFailedLoadIpMessage,
-            ),
+          PhotoListStateError _ => Center(
+            child: Text(
+                wm.l10n.photoListFailedLoadListPhotoMessage,
+              ),
+          ),
         },
       ),
     );

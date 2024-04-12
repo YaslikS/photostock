@@ -3,6 +3,7 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/utils/extentions/hex_color_to_color.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template photos_list_widget.class}
@@ -22,6 +23,7 @@ class PhotoListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
+    final l10n = context.l10n;
     final theme = Theme.of(context);
     return GridTile(
       child: Padding(
@@ -33,7 +35,7 @@ class PhotoListItemWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: HexColor.fromHex(photoItem.color),
-                blurRadius: 5,
+                blurRadius: AppSizes.double05,
               ),
             ],
           ),
@@ -67,7 +69,7 @@ class PhotoListItemWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${photoItem.likes} likes',
+                      '${photoItem.likes} ${l10n.photoItemLikes}',
                       style: theme.textTheme.labelLarge?.copyWith(
                         color: colorScheme.background,
                       ),
