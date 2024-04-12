@@ -10,12 +10,14 @@ import 'package:flutter_template/features/photostock_list/presentation/photo_lis
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
 /// DI factory for [PhotoListWM].
 PhotoListWM photoListWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scope = context.read<IPhotoListScope>();
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
 
   return PhotoListWM(
     PhotoListModel(
@@ -24,6 +26,7 @@ PhotoListWM photoListWMFactory(BuildContext context) {
     ),
     1,
     [],
+    scaffoldMessenger: scaffoldMessenger,
   );
 }
 
@@ -53,6 +56,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   /// current page
   int page;
 
+  final ScaffoldMessengerState _scaffoldMessenger;
   /// current list of photos
   List<PhotoItem> currentPhotos;
 
@@ -60,8 +64,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   PhotoListWM(
     super._model,
     this.page,
-    this.currentPhotos,
-  );
+    this.currentPhotos, {
+    required ScaffoldMessengerState scaffoldMessenger,
+  }) : _scaffoldMessenger = scaffoldMessenger;
 
   @override
   void listNeedsUpdate() {
@@ -83,5 +88,10 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
       listNeedsUpdate: listNeedsUpdate,
       oldLastItem: count,
     );
+  }
+
+  void _showErrorAppSnackBar() {
+    final _ = _scaffoldMessenger
+        .showSnackBar(SnackBar(content: Text("Upload failure")));
   }
 }

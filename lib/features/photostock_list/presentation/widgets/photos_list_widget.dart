@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/features/photostock_list/presentation/photo_list_wm.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
-import 'package:scrollview_observer/scrollview_observer.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template photos_list_widget.class}
 /// PhotoListWidget.
 /// {@endtemplate}
-class PhotosListWidget extends StatefulWidget {
+class PhotosListWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
-  PhotosListWidget({
+  const PhotosListWidget({
     required this.listNeedsUpdate,
     required this.photosList,
     required this.oldLastItem,
@@ -28,39 +28,34 @@ class PhotosListWidget extends StatefulWidget {
   final List<PhotoItem> photosList;
 
   @override
-  State<PhotosListWidget> createState() => _PhotosListWidgetState();
-}
-
-class _PhotosListWidgetState extends State<PhotosListWidget> {
-
-  @override
   Widget build(BuildContext context) {
+    final colorScheme = AppColorScheme.of(context);
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification is ScrollEndNotification &&
             notification.metrics.pixels == notification.metrics.maxScrollExtent) {
-          widget.listNeedsUpdate();
+          listNeedsUpdate();
         }
         return false;
       },
       child: CustomScrollView(
         slivers: [
-          const CupertinoSliverNavigationBar(
-            backgroundColor: Colors.white,
+          CupertinoSliverNavigationBar(
+            backgroundColor: colorScheme.background,
             largeTitle: Text("Photos"),
             border: Border(
               bottom: BorderSide(
-                color: CupertinoColors.white,
+                color: colorScheme.background,
               ),
             ),
           ),
           SliverGrid.builder(
-            itemCount: widget.photosList.length,
+            itemCount: photosList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) {
-              return PhotoListItemWidget(photoItem: widget.photosList[i]);
+              return PhotoListItemWidget(photoItem: photosList[i]);
             },
           ),
           const SliverToBoxAdapter(
