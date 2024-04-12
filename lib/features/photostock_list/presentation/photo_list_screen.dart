@@ -19,6 +19,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
     const PhotoListStateInitial();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ValueListenableBuilder<PhotoListState>(
         valueListenable: wm.state,
         builder: (_, state, __) => switch (state) {

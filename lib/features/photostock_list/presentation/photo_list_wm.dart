@@ -76,10 +76,12 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   PhotosListWidget updateList(List<PhotoItem> newPhotos) {
+    final count = currentPhotos.length;
     currentPhotos.addAll(newPhotos);
     return PhotosListWidget(
       photosList: currentPhotos,
       listNeedsUpdate: listNeedsUpdate,
+      oldLastItem: count,
     );
   }
 }

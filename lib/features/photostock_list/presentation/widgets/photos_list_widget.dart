@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
+import 'package:scrollview_observer/scrollview_observer.dart';
 
 /// {@template photos_list_widget.class}
 /// PhotoListWidget.
 /// {@endtemplate}
-class PhotosListWidget extends StatelessWidget {
+class PhotosListWidget extends StatefulWidget {
   /// {@macro photos_list_widget.class}
-  const PhotosListWidget({
+  PhotosListWidget({
     required this.listNeedsUpdate,
     required this.photosList,
+    required this.oldLastItem,
     super.key,
   });
+
+  /// end of old list
+  final int oldLastItem;
 
   /// update list of photos
   final VoidCallback listNeedsUpdate;
@@ -22,12 +28,18 @@ class PhotosListWidget extends StatelessWidget {
   final List<PhotoItem> photosList;
 
   @override
+  State<PhotosListWidget> createState() => _PhotosListWidgetState();
+}
+
+class _PhotosListWidgetState extends State<PhotosListWidget> {
+
+  @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification is ScrollEndNotification &&
             notification.metrics.pixels == notification.metrics.maxScrollExtent) {
-          listNeedsUpdate();
+          widget.listNeedsUpdate();
         }
         return false;
       },
@@ -43,12 +55,12 @@ class PhotosListWidget extends StatelessWidget {
             ),
           ),
           SliverGrid.builder(
-            itemCount: photosList.length,
+            itemCount: widget.photosList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) {
-              return PhotoListItemWidget(photoItem: photosList[i]);
+              return PhotoListItemWidget(photoItem: widget.photosList[i]);
             },
           ),
           const SliverToBoxAdapter(
