@@ -9,6 +9,7 @@ import 'package:flutter_template/features/photostock_list/di/photo_list_scope.da
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_model.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
 import 'package:provider/provider.dart';
 
 /// DI factory for [PhotoListWM].
@@ -37,7 +38,7 @@ abstract interface class IPhotoListWM
   void listNeedsUpdate();
 
   /// update list of photos
-  void updateList(List<PhotoItem> photos);
+  PhotosListWidget updateList(List<PhotoItem> newPhotos);
 }
 
 /// {@template photo_list_wm.class}
@@ -63,20 +64,22 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   );
 
   @override
-  Future<void> listNeedsUpdate() async {
-    await model.loadPhotos(page);
-    ++page;
+  void listNeedsUpdate() {
+    model.loadPhotos(page++);
   }
 
   @override
   void initWidgetModel() {
-    model.loadPhotos(page);
-    ++page;
+    model.loadPhotos(page++);
     super.initWidgetModel();
   }
 
   @override
-  void updateList(List<PhotoItem> photos) {
-    currentPhotos.addAll(photos);
+  PhotosListWidget updateList(List<PhotoItem> newPhotos) {
+    currentPhotos.addAll(newPhotos);
+    return PhotosListWidget(
+      photosList: currentPhotos,
+      listNeedsUpdate: listNeedsUpdate,
+    );
   }
 }

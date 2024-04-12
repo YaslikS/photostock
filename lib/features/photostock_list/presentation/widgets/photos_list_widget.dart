@@ -53,9 +53,12 @@ class PhotosListWidget extends StatelessWidget {
           ),
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(AppSizes.double20),
+              padding: EdgeInsets.only(
+                bottom: AppSizes.double32,
+                top: AppSizes.double20,
+              ),
               child: Center(
-                child: CircularProgressIndicator(),
+                child: CupertinoActivityIndicator(),
               ),
             ),
           ),
