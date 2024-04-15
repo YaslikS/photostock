@@ -22,51 +22,40 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
 
     return Scaffold(
       backgroundColor: wm.colorScheme.background,
-      body: CustomScrollView(
-        slivers: [
-          CupertinoSliverNavigationBar(
-            backgroundColor: wm.colorScheme.background,
-            largeTitle: Text(wm.l10n.photoListTitle),
-            border: Border(
-              bottom: BorderSide(
-                color: wm.colorScheme.background,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, isScrolled) {
+          return <Widget>[
+            CupertinoSliverNavigationBar(
+              backgroundColor: wm.colorScheme.background,
+              largeTitle: Text(wm.l10n.photoListTitle),
+              border: Border(
+                bottom: BorderSide(
+                  color: wm.colorScheme.background,
+                ),
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ValueListenableBuilder<PhotoListState>(
-              valueListenable: wm.state,
-              builder: (_, state, __) => switch (state) {
-                PhotoListStateInitial _ => const Center(
-                    child: SizedBox.shrink(),
-                  ),
-                PhotoListStateLoading _ => const Center(
-                    child: CupertinoActivityIndicator(),
-                  ),
-                PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
-                    photosList: photoEntity.photos,
-                    listNeedsUpdate: wm.listNeedsUpdate,
-                  ),
-                PhotoListStateError _ => Center(
-                    child: Text(
-                      wm.l10n.photoListFailedLoadListPhotoMessage,
-                    ),
-                  ),
-              },
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: AppSizes.double32,
-                top: AppSizes.double20,
+            )
+          ];
+        },
+        body: ValueListenableBuilder<PhotoListState>(
+          valueListenable: wm.state,
+          builder: (_, state, __) => switch (state) {
+            PhotoListStateInitial _ => const Center(
+                child: SizedBox.shrink(),
               ),
-              child: Center(
+            PhotoListStateLoading _ => const Center(
                 child: CupertinoActivityIndicator(),
               ),
-            ),
-          ),
-        ],
+            PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
+                photosList: photoEntity.photos,
+                listNeedsUpdate: wm.listNeedsUpdate,
+              ),
+            PhotoListStateError _ => Center(
+                child: Text(
+                  wm.l10n.photoListFailedLoadListPhotoMessage,
+                ),
+              ),
+          },
+        ),
       ),
     );
   }
