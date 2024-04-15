@@ -1,26 +1,26 @@
-import 'package:elementary/elementary.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
-import 'package:flutter_template/features/photostock_detail/presentation/detail_photo_wm.dart';
+import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// {@template detail_photo_screen.class}
 /// PhotoListScreen.
 /// {@endtemplate}
-class DetailPhotoScreen extends ElementaryWidget<IDetailPhotoWM> {
+@RoutePage(name: AppRouteNames.photoDetailScreen)
+class DetailPhotoScreen extends StatelessWidget {
   /// {@macro detail_photo_screen.class}
   const DetailPhotoScreen({
     required this.photoItem,
     super.key,
-    WidgetModelFactory wmFactory = defaultDetailPhotoWMFactory,
-  }) : super(wmFactory);
+  });
 
   /// one item in List of photos
   final PhotoItem photoItem;
 
   @override
-  Widget build(IDetailPhotoWM wm) {
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

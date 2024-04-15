@@ -25,11 +25,10 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<PhotoDetailRouterArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(
-            child: DetailPhotoFlow(
+        child: DetailPhotoScreen(
           photoItem: args.photoItem,
           key: args.key,
-        )),
+        ),
       );
     },
     FeatureExampleRoute.name: (routeData) {
@@ -68,7 +67,7 @@ class DebugRouter extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [DetailPhotoFlow]
+/// [DetailPhotoScreen]
 class PhotoDetailRouter extends PageRouteInfo<PhotoDetailRouterArgs> {
   PhotoDetailRouter({
     required PhotoItem photoItem,
