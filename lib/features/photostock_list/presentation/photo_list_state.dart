@@ -29,10 +29,10 @@ class PhotoListStateLoaded extends PhotoListState {
   final PhotoEntity photoEntity;
 
   /// {@macro photo_list_state_loaded.class}
-  // PhotoListStateLoaded(PhotoEntity newPhotoEntity) : photoEntity = newPhotoEntity {
-  //   photoEntity.photos.addAll(newPhotoEntity.photos);
-  // }
-  const PhotoListStateLoaded(this.photoEntity);
+  PhotoListStateLoaded(PhotoEntity newPhotoEntity) : photoEntity = newPhotoEntity {
+    photoEntity.photos.addAll(newPhotoEntity.photos);
+  }
+  // const PhotoListStateLoaded(this.photoEntity);
 }
 
 /// {@template photo_list_state_error.class}
