@@ -4,7 +4,8 @@ import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
 import 'package:flutter_template/features/photostock_list/domain/repositories/i_photos_repository.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
-import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/new_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 
 /// {@template photo_list_model.class}
 /// [PhotoListModel] for [PhotoListScreen].
@@ -12,10 +13,18 @@ import 'package:flutter_template/features/photostock_list/presentation/photo_lis
 final class PhotoListModel extends BaseModel {
   final IPhotosRepository _repository;
 
-  final _state = ValueNotifier<PhotoListState>(const PhotoListStateInitial());
+  final _state = ValueNotifier<ScreenListState>(
+    ScreenListStateLoaded([]),
+  );
+  final _stateNewList = ValueNotifier<NewListState>(
+    const NewListStateInitial(),
+  );
 
   /// State of screen.
-  ValueListenable<PhotoListState> get state => _state;
+  ValueListenable<ScreenListState> get state => _state;
+
+  /// State of new photos.
+  ValueListenable<NewListState> get stateNewList => _stateNewList;
 
   /// {@macro photo_list_model.class}
   PhotoListModel({
@@ -31,15 +40,19 @@ final class PhotoListModel extends BaseModel {
 
   /// Load list of photos.
   Future<void> loadPhotos(int page) async {
-    _state.emit(const PhotoListStateLoading());
+    _stateNewList.emit(const NewListStateLoading());
 
     final result = await makeCall(() => _repository.getPhotos(page));
 
     switch (result) {
       case ResultOk(:final data):
-        _state.emit(PhotoListStateLoaded(data));
+        final currentPhoto1 = (_state.value as ScreenListStateLoaded).photos;
+        currentPhoto1.addAll(data.photos);
+
+        _state.emit(ScreenListStateLoaded(currentPhoto1));
+        _stateNewList.emit(NewListStateLoaded(data));
       case ResultFailed():
-        _state.emit(const PhotoListStateError());
+        _stateNewList.emit(const NewListStateError());
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
-import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_wm.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
 
@@ -18,13 +18,12 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
 
   @override
   Widget build(IPhotoListWM wm) {
-    const PhotoListStateInitial();
+    const ScreenListStateInitial();
 
-    return Scaffold(
-      backgroundColor: wm.colorScheme.background,
-      body: NestedScrollView(
+    return CupertinoPageScaffold(
+      child: NestedScrollView(
         headerSliverBuilder: (context, isScrolled) {
-          return <Widget>[
+          return [
             CupertinoSliverNavigationBar(
               backgroundColor: wm.colorScheme.background,
               largeTitle: Text(wm.l10n.photoListTitle),
@@ -36,27 +35,28 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
             )
           ];
         },
-        body: ValueListenableBuilder<PhotoListState>(
+        body: ValueListenableBuilder<ScreenListState>(
           valueListenable: wm.state,
           builder: (_, state, __) => switch (state) {
-            PhotoListStateInitial _ => const Center(
-                child: SizedBox.shrink(),
+            ScreenListStateInitial _ => const Center(
+              child: SizedBox.shrink(),
+            ),
+            ScreenListStateLoading _ => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
+            ScreenListStateLoaded(:final photos) => PhotosListWidget(
+              photosList: photos,
+              listNeedsUpdate: wm.listNeedsUpdate,
+            ),
+            ScreenListStateError _ => Center(
+              child: Text(
+                wm.l10n.photoListFailedLoadListPhotoMessage,
               ),
-            PhotoListStateLoading _ => const Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
-                photosList: photoEntity.photos,
-                listNeedsUpdate: wm.listNeedsUpdate,
-              ),
-            PhotoListStateError _ => Center(
-                child: Text(
-                  wm.l10n.photoListFailedLoadListPhotoMessage,
-                ),
-              ),
+            ),
           },
         ),
       ),
     );
   }
 }
+

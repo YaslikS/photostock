@@ -20,7 +20,6 @@ final class PhotoListScope extends DisposableObject implements IPhotoListScope {
     final appScope = context.read<IAppScope>();
     final photoUrl = appScope.appConfig.url.value;
     final accessKey = appScope.appConfig.accessKey;
-    final page = appScope.appConfig.page;
 
     return PhotoListScope(
       PhotosRepository(

@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_constants.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
 
@@ -35,17 +32,17 @@ class PhotosListWidget extends StatelessWidget {
       },
       child: Column(
         children: [
-          Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: photosList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: AppConstants.int2,
-              ),
-              itemBuilder: (context, i) {
-                return PhotoListItemWidget(photoItem: photosList[i]);
-              },
+          GridView.builder(
+            shrinkWrap: true,
+            // physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemCount: photosList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
             ),
+            itemBuilder: (context, i) {
+              return PhotoListItemWidget(photoItem: photosList[i]);
+            },
           ),
           const Padding(
             padding: EdgeInsets.only(
