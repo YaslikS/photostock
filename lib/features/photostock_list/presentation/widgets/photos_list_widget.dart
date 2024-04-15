@@ -16,12 +16,8 @@ class PhotosListWidget extends StatelessWidget {
   const PhotosListWidget({
     required this.listNeedsUpdate,
     required this.photosList,
-    required this.oldLastItem,
     super.key,
   });
-
-  /// end of old list
-  final int oldLastItem;
 
   /// update list of photos
   final VoidCallback listNeedsUpdate;

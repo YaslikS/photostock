@@ -42,7 +42,7 @@ abstract interface class IPhotoListWM
   void listNeedsUpdate();
 
   /// update list of photos
-  PhotosListWidget updateList(List<PhotoItem> newPhotos);
+  // PhotosListWidget updateList(List<PhotoItem> newPhotos);
 }
 
 /// {@template photo_list_wm.class}
@@ -80,16 +80,16 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
     super.initWidgetModel();
   }
 
-  @override
-  PhotosListWidget updateList(List<PhotoItem> newPhotos) {
-    final count = currentPhotos.length;
-    currentPhotos.addAll(newPhotos);
-    return PhotosListWidget(
-      photosList: currentPhotos,
-      listNeedsUpdate: listNeedsUpdate,
-      oldLastItem: count,
-    );
-  }
+  // @override
+  // PhotosListWidget updateList(List<PhotoItem> newPhotos) {
+  //   final count = currentPhotos.length;
+  //   currentPhotos.addAll(newPhotos);
+  //   return PhotosListWidget(
+  //     photosList: currentPhotos,
+  //     listNeedsUpdate: listNeedsUpdate,
+  //     oldLastItem: count,
+  //   );
+  // }
 
   void _showErrorAppSnackBar() {
     final _ = _scaffoldMessenger

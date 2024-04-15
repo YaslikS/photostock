@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_wm.dart';
+import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
 
 /// {@template photo_list_screen.class}
 /// PhotoListScreen.
@@ -29,14 +30,15 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
           PhotoListStateLoading _ => const Center(
               child: CupertinoActivityIndicator(),
             ),
-          PhotoListStateLoaded(:final photoEntity) => wm.updateList(
-              photoEntity.photos,
+          PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
+              photosList: photoEntity.photos,
+              listNeedsUpdate: wm.listNeedsUpdate,
             ),
           PhotoListStateError _ => Center(
-            child: Text(
+              child: Text(
                 wm.l10n.photoListFailedLoadListPhotoMessage,
               ),
-          ),
+            ),
         },
       ),
     );
