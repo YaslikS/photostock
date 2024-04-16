@@ -23,7 +23,7 @@ final class PhotoListScope extends DisposableObject implements IPhotoListScope {
 
     return PhotoListScope(
       PhotosRepository(
-        photoApi: PhotoApi(appScope.dio, baseUrl: photoUrl + accessKey),  // TODO: YaslikS - remove accessKey from url
+        photoApi: PhotoApi(appScope.dio, baseUrl: photoUrl + accessKey),
         photoConverter: const PhotoConverter(),
       ),
     );

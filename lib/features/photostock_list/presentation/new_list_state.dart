@@ -1,5 +1,3 @@
-import 'package:flutter_template/features/photostock_list/domain/entities/photo_entity.dart';
-
 /// The state of feature example screen.
 sealed class NewListState {
   const NewListState();
@@ -25,11 +23,8 @@ class NewListStateLoading extends NewListState {
 /// list of photos is loaded.
 /// {@endtemplate}
 class NewListStateLoaded extends NewListState {
-  /// object with list of photos.
-  PhotoEntity photoEntity;
-
   /// {@macro new_list_state_loaded.class}
-  NewListStateLoaded(this.photoEntity);
+  const NewListStateLoaded();
 }
 
 /// {@template new_list_state_error.class}

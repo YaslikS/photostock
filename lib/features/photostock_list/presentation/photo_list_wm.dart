@@ -5,9 +5,9 @@ import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/photostock_list/di/photo_list_scope.dart';
+import 'package:flutter_template/features/photostock_list/presentation/new_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_model.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
-import 'package:flutter_template/features/photostock_list/presentation/new_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 import 'package:provider/provider.dart';
 
@@ -32,16 +32,13 @@ abstract interface class IPhotoListWM
     with ThemeIModelMixin, ILocalizationMixin
     implements IWidgetModel {
   /// State of screen.
-  ValueListenable<ScreenListState> get state;
+  ValueListenable<ScreenListState> get screenState;
 
   /// State of new photos.
   ValueListenable<NewListState> get stateNewList;
 
   /// updating list
   void listNeedsUpdate();
-
-  /// update list of photos
-// PhotosListWidget updateList(List<PhotoItem> newPhotos);
 }
 
 /// {@template photo_list_wm.class}
@@ -51,7 +48,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
     with ThemeWMMixin, LocalizationMixin
     implements IPhotoListWM {
   @override
-  ValueListenable<ScreenListState> get state => model.state;
+  ValueListenable<ScreenListState> get screenState => model.screenState;
 
   @override
   ValueListenable<NewListState> get stateNewList => model.stateNewList;
@@ -77,11 +74,5 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   void initWidgetModel() {
     model.loadPhotos(page++);
     super.initWidgetModel();
-  }
-
-  void _showErrorAppSnackBar() {
-    _scaffoldMessenger.showSnackBar(
-      SnackBar(content: Text(l10n.photoListFailedLoadListPhotoMessage)),
-    );
   }
 }
