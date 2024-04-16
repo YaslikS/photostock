@@ -8,7 +8,7 @@ part of 'photo_item.dart';
 
 PhotoItem _$PhotoItemFromJson(Map<String, dynamic> json) => PhotoItem(
       color: json['color'] as String,
-      blur_hash: json['blur_hash'] as String,
+      blur_hash: json['blur_hash'] as String?,
       urls: Urls.fromJson(json['urls'] as Map<String, dynamic>),
       likes: json['likes'] as int,
       user: User.fromJson(json['user'] as Map<String, dynamic>),

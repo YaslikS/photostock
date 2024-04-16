@@ -37,8 +37,14 @@ abstract interface class IPhotoListWM
   /// State of new photos.
   ValueListenable<NewListState> get stateNewList;
 
+  /// controller controls the scroll of the list
+  ScrollController get scrollController;
+
   /// updating list
   void listNeedsUpdate();
+
+  /// listener for a Scroll Controller
+  void scrollListener();
 }
 
 /// {@template photo_list_wm.class}
@@ -56,6 +62,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   /// current page
   int page;
 
+  @override
+  final ScrollController scrollController = ScrollController();
+
   final ScaffoldMessengerState _scaffoldMessenger;
 
   /// {@macro photo_list_wm.class}
@@ -72,7 +81,16 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   void initWidgetModel() {
+    scrollController.addListener(scrollListener);
     model.loadPhotos(page++);
     super.initWidgetModel();
+  }
+
+  @override
+  void scrollListener() {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      listNeedsUpdate();
+    }
   }
 }

@@ -51,7 +51,7 @@ class PhotoListItemWidget extends StatelessWidget {
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Center(
-                      child: BlurHash(hash: photoItem.blur_hash),
+                      child: BlurHash(hash: photoItem.blur_hash ?? ""),
                     );
                   },
                 ),

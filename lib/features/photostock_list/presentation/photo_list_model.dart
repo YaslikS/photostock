@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/utils/extentions/value_notifier_x.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
@@ -47,10 +48,13 @@ final class PhotoListModel extends BaseModel {
 
     switch (result) {
       case ResultOk(:final data):
-        final currentPhoto1 = (_screenState.value as ScreenListStateAccumulation).photos;
-        currentPhoto1.addAll(data.photos);
+        var currentPhoto = <PhotoItem>[];
+        if (_screenState.value is ScreenListStateAccumulation) {
+          currentPhoto = (_screenState.value as ScreenListStateAccumulation).photos;
+          currentPhoto.addAll(data.photos);
+        }
 
-        _screenState.emit(ScreenListStateAccumulation(currentPhoto1));
+        _screenState.emit(ScreenListStateAccumulation(currentPhoto));
         _stateNewList.emit(const NewListStateLoaded());
       case ResultFailed():
         _stateNewList.emit(const NewListStateError());
