@@ -12,7 +12,6 @@ class PhotosListWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
   const PhotosListWidget({
     required this.stateNewList,
-    required this.scrollController,
     required this.listNeedsUpdate,
     required this.photosList,
     super.key,
@@ -20,9 +19,6 @@ class PhotosListWidget extends StatelessWidget {
 
   /// observing status of uploading new photos
   final ValueListenable<NewListState> stateNewList;
-
-  /// Scroll Controller
-  final ScrollController scrollController;
 
   /// update list of photos
   final VoidCallback listNeedsUpdate;

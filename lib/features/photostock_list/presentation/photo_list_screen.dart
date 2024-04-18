@@ -39,7 +39,6 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
             ScreenListStateAccumulation(:final photos) =>
                 PhotosListWidget(
                 stateNewList: wm.stateNewList,
-                scrollController: wm.scrollController,
                 listNeedsUpdate: wm.listNeedsUpdate,
                 photosList: photos,
               ),
