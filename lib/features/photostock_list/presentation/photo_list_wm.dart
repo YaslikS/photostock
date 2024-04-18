@@ -38,7 +38,11 @@ abstract interface class IPhotoListWM
   ValueListenable<NewListState> get stateNewList;
 
   /// controller controls the scroll of the list
-  ScrollController get scrollController;
+  // ScrollController get getScrollController;
+
+  GlobalKey<NestedScrollViewState> get getGlobalKey;
+
+  ScrollController get getInnerController;
 
   /// updating list
   void listNeedsUpdate();
@@ -62,10 +66,20 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   /// current page
   int page;
 
-  @override
-  ScrollController get scrollController => scrollController1;
+  // @override
+  // ScrollController get getScrollController => scrollController;
 
-  final ScrollController scrollController1 = ScrollController();
+  // final ScrollController scrollController = ScrollController();
+
+  @override
+  GlobalKey<NestedScrollViewState> get getGlobalKey => _globalKey;
+
+  final GlobalKey<NestedScrollViewState> _globalKey = GlobalKey();
+
+  @override
+  ScrollController get getInnerController => _innerController;
+
+  late ScrollController _innerController = ScrollController();
 
   final ScaffoldMessengerState _scaffoldMessenger;
 
@@ -83,16 +97,16 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   void initWidgetModel() {
-    scrollController1.addListener(scrollListener);
+    _innerController = _globalKey.currentState!.innerController;
+    _innerController.addListener(scrollListener);
     model.loadPhotos(page++);
     super.initWidgetModel();
   }
 
   @override
   void scrollListener() {
-    if (scrollController1.offset >= scrollController1.positions.last.maxScrollExtent
-        && !scrollController1.position.outOfRange
-    ) {
+    if (_innerController.offset >= _innerController.positions.last.maxScrollExtent &&
+        !_innerController.position.outOfRange) {
       listNeedsUpdate();
     }
   }

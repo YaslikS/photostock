@@ -19,7 +19,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   Widget build(IPhotoListWM wm) {
     return Scaffold(
       body: NestedScrollView(
-        controller: wm.scrollController,
+        key: wm.getGlobalKey,
         headerSliverBuilder: (context, isScrolled) {
           return [
             CupertinoSliverNavigationBar(
