@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_wm.dart';
 import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
@@ -16,12 +17,13 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
 
   @override
   Widget build(IPhotoListWM wm) {
-    return CupertinoPageScaffold(
-      child: NestedScrollView(
+    return Scaffold(
+      body: NestedScrollView(
+        controller: wm.scrollController,
         headerSliverBuilder: (context, isScrolled) {
           return [
             CupertinoSliverNavigationBar(
-              backgroundColor: wm.colorScheme.background,
+              backgroundColor: wm.colorScheme.background.withAlpha(200),
               largeTitle: Text(wm.l10n.photoListTitle),
               border: Border(
                 bottom: BorderSide(
@@ -34,11 +36,15 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
         body: ValueListenableBuilder<ScreenListState>(
           valueListenable: wm.screenState,
           builder: (_, state, __) => switch (state) {
-            ScreenListStateAccumulation(:final photos) => PhotosListWidget(
+            ScreenListStateAccumulation(:final photos) =>
+                PhotosListWidget(
                 stateNewList: wm.stateNewList,
                 scrollController: wm.scrollController,
                 listNeedsUpdate: wm.listNeedsUpdate,
                 photosList: photos,
+              ),
+            ScreenListStateLoading _ => const Center(
+                child: CupertinoActivityIndicator(),
               ),
           },
         ),

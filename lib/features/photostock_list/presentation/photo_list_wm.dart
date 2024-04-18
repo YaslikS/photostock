@@ -63,7 +63,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   int page;
 
   @override
-  final ScrollController scrollController = ScrollController();
+  ScrollController get scrollController => scrollController1;
+
+  final ScrollController scrollController1 = ScrollController();
 
   final ScaffoldMessengerState _scaffoldMessenger;
 
@@ -81,15 +83,16 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
 
   @override
   void initWidgetModel() {
-    scrollController.addListener(scrollListener);
+    scrollController1.addListener(scrollListener);
     model.loadPhotos(page++);
     super.initWidgetModel();
   }
 
   @override
   void scrollListener() {
-    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-        !scrollController.position.outOfRange) {
+    if (scrollController1.offset >= scrollController1.positions.last.maxScrollExtent
+        && !scrollController1.position.outOfRange
+    ) {
       listNeedsUpdate();
     }
   }

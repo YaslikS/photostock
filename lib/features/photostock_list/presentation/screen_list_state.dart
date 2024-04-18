@@ -5,8 +5,17 @@ sealed class ScreenListState {
   const ScreenListState();
 }
 
-/// {@template screen_list_state_loaded.class}
-/// list of photos is loaded.
+/// {@template screen_list_state_loading.class}
+/// list of photos is load.
+/// {@endtemplate}
+class ScreenListStateLoading extends ScreenListState {
+
+  /// {@macro screen_list_state_loading.class}
+  const ScreenListStateLoading();
+}
+
+/// {@template screen_list_state_accumulation.class}
+/// photos are accumulating here.
 /// {@endtemplate}
 class ScreenListStateAccumulation extends ScreenListState {
   /// object with list of photos.

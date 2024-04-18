@@ -15,7 +15,7 @@ final class PhotoListModel extends BaseModel {
   final IPhotosRepository _repository;
 
   final _screenState = ValueNotifier<ScreenListState>(
-    ScreenListStateAccumulation([]),
+    const ScreenListStateLoading(),
   );
   final _stateNewList = ValueNotifier<NewListState>(
     const NewListStateInitial(),
@@ -48,13 +48,17 @@ final class PhotoListModel extends BaseModel {
 
     switch (result) {
       case ResultOk(:final data):
-        var currentPhoto = <PhotoItem>[];
+        final currentPhoto = data.photos;
         if (_screenState.value is ScreenListStateAccumulation) {
-          currentPhoto = (_screenState.value as ScreenListStateAccumulation).photos;
-          currentPhoto.addAll(data.photos);
+          final newPhoto = List<PhotoItem>.from(
+            (_screenState.value as ScreenListStateAccumulation).photos,
+          );
+          newPhoto.addAll(currentPhoto);
+          _screenState.emit(ScreenListStateAccumulation(newPhoto));
+        } else {
+          _screenState.emit(ScreenListStateAccumulation(currentPhoto));
         }
 
-        _screenState.emit(ScreenListStateAccumulation(currentPhoto));
         _stateNewList.emit(const NewListStateLoaded());
       case ResultFailed():
         _stateNewList.emit(const NewListStateError());

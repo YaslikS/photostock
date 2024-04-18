@@ -36,7 +36,7 @@ class PhotosListWidget extends StatelessWidget {
       children: [
         Expanded(
           child: GridView.builder(
-            controller: scrollController,
+            // controller: scrollController,
             padding: EdgeInsets.zero,
             itemCount: photosList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
