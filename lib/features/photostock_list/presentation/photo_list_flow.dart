@@ -24,6 +24,6 @@ class PhotoListFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return const PhotoListScreen();
+    return PhotoListScreen();
   }
 }

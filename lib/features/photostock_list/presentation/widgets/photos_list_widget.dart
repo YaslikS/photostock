@@ -8,14 +8,18 @@ import 'package:flutter_template/features/photostock_list/presentation/widgets/p
 /// {@template photos_list_widget.class}
 /// PhotoListWidget.
 /// {@endtemplate}
-class PhotosListWidget extends StatelessWidget {
+class PhotosListWidget extends StatefulWidget {
   /// {@macro photos_list_widget.class}
   const PhotosListWidget({
     required this.stateNewList,
     required this.listNeedsUpdate,
     required this.photosList,
+    required this.scrollController,
     super.key,
   });
+
+  /// controller controls the scroll of the list
+  final ScrollController scrollController;
 
   /// observing status of uploading new photos
   final ValueListenable<NewListState> stateNewList;
@@ -27,24 +31,34 @@ class PhotosListWidget extends StatelessWidget {
   final List<PhotoItem> photosList;
 
   @override
+  State<PhotosListWidget> createState() => _PhotosListWidgetState();
+}
+
+class _PhotosListWidgetState extends State<PhotosListWidget> {
+  @override
+  void initState() {
+    super.initState();
+    widget.scrollController.addListener(_scrollListener);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: GridView.builder(
-            // controller: scrollController,
             padding: EdgeInsets.zero,
-            itemCount: photosList.length,
+            itemCount: widget.photosList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) {
-              return PhotoListItemWidget(photoItem: photosList[i]);
+              return PhotoListItemWidget(photoItem: widget.photosList[i]);
             },
           ),
         ),
         ValueListenableBuilder<NewListState>(
-          valueListenable: stateNewList,
+          valueListenable: widget.stateNewList,
           builder: (_, state, __) => switch (state) {
             NewListStateLoading _ => const Padding(
                 padding: EdgeInsets.only(
@@ -60,5 +74,14 @@ class PhotosListWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  /// listener for a Scroll Controller
+  void _scrollListener() {
+    if (widget.scrollController.offset >=
+            widget.scrollController.positions.last.maxScrollExtent &&
+        !widget.scrollController.position.outOfRange) {
+      widget.listNeedsUpdate();
+    }
   }
 }

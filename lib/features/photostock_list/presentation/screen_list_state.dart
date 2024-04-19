@@ -9,7 +9,6 @@ sealed class ScreenListState {
 /// list of photos is load.
 /// {@endtemplate}
 class ScreenListStateLoading extends ScreenListState {
-
   /// {@macro screen_list_state_loading.class}
   const ScreenListStateLoading();
 }
