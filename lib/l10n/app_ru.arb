@@ -115,5 +115,12 @@
     "---------": "---------",
     "description": "Пример фичи"
   },
-  "featureExampleFailedLoadIpMessage": "Не удалось загрузить IP-адрес"
+  "featureExampleFailedLoadIpMessage": "Не удалось загрузить IP-адрес",
+  "@segmentPhotostockList": {
+    "---------": "---------",
+    "description": "Фотосток лист"
+  },
+  "photoListTitle": "Фото",
+  "photoListFailedLoadListPhotoMessage": "Не удалось загрузить список фото",
+  "photoItemLikes": "лайков"
 }

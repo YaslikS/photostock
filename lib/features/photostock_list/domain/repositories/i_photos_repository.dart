@@ -8,5 +8,5 @@ import 'package:flutter_template/features/photostock_list/domain/entities/photo_
 // ignore: one_member_abstracts
 abstract interface class IPhotosRepository {
   /// Request to get the current list of photos.
-  RequestOperation<PhotoEntity> getPhotos();
+  RequestOperation<PhotoEntity> getPhotos(int page);
 }

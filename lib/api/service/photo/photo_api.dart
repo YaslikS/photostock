@@ -12,5 +12,8 @@ abstract class PhotoApi {
 
   /// Request to get the current list of photos
   @GET('')
-  Future<List<PhotoItem>> getPhoto([@Query('format') String format = 'json']);
+  Future<List<PhotoItem>> getPhoto([
+    @Query('page') int page = 1,
+    @Query('format') String format = 'json',
+  ]);
 }

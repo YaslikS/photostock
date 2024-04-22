@@ -114,5 +114,12 @@
     "---------": "---------",
     "description": "Example of feature"
   },
-  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address",
+  "@segmentPhotostockList": {
+    "---------": "---------",
+    "description": "Photostock List"
+  },
+  "photoListTitle": "Photo",
+  "photoListFailedLoadListPhotoMessage": "Failed to upload photo list",
+  "photoItemLikes": "likes"
 }

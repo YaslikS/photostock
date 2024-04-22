@@ -12,7 +12,7 @@ class PhotoItem {
   /// color
   final String color;
   /// hash for blur
-  final String blur_hash;
+  final String? blur_hash;
   /// link to the photo
   final Urls urls;
   /// likes for photos

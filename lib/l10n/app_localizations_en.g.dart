@@ -202,4 +202,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get featureExampleFailedLoadIpMessage => 'Failed to load IP address';
+
+  @override
+  String get photoListTitle => 'Photo';
+
+  @override
+  String get photoListFailedLoadListPhotoMessage => 'Failed to upload photo list';
+
+  @override
+  String get photoItemLikes => 'likes';
 }
