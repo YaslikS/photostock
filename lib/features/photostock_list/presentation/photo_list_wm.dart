@@ -89,6 +89,21 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   @override
   void initWidgetModel() {
     model.loadPhotos(page++);
+    _observerStateNewList();
     super.initWidgetModel();
+  }
+
+  void _observerStateNewList() {
+    stateNewList.addListener(() {
+      if (stateNewList.value is NewListStateError) {
+        _showErrorAppSnackBar();
+      }
+    });
+  }
+
+  void _showErrorAppSnackBar() {
+    _scaffoldMessenger.showSnackBar(
+      SnackBar(content: Text(l10n.photoListFailedLoadListPhotoMessage)),
+    );
   }
 }
