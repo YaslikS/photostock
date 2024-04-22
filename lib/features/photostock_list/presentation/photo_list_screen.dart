@@ -10,19 +10,16 @@ import 'package:flutter_template/features/photostock_list/presentation/widgets/p
 /// {@endtemplate}
 class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   /// {@macro photo_list_screen.class}
-  PhotoListScreen({
+  const PhotoListScreen({
     super.key,
     WidgetModelFactory wmFactory = photoListWMFactory,
   }) : super(wmFactory);
-
-  /// for access the internal scrollcontroller
-  final GlobalKey<NestedScrollViewState> _globalKey = GlobalKey();
 
   @override
   Widget build(IPhotoListWM wm) {
     return Scaffold(
       body: NestedScrollView(
-        key: _globalKey,
+        key: wm.globalKey,
         headerSliverBuilder: (context, isScrolled) {
           return [
             CupertinoSliverNavigationBar(
@@ -40,7 +37,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
           valueListenable: wm.screenState,
           builder: (_, state, __) => switch (state) {
             ScreenListStateAccumulation(:final photos) => PhotosListWidget(
-                scrollController: _innerController,
+                scrollController: wm.innerController,
                 stateNewList: wm.stateNewList,
                 listNeedsUpdate: wm.listNeedsUpdate,
                 photosList: photos,
@@ -52,9 +49,5 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
         ),
       ),
     );
-  }
-
-  ScrollController get _innerController {
-    return _globalKey.currentState!.innerController;
   }
 }
