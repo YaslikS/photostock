@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
-import 'package:flutter_template/features/photostock_list/presentation/new_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/uploaded_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photo_list_item_widget.dart';
 
 /// {@template photos_list_widget.class}

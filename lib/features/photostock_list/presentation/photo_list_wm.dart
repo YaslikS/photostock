@@ -5,7 +5,7 @@ import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/photostock_list/di/photo_list_scope.dart';
-import 'package:flutter_template/features/photostock_list/presentation/new_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/uploaded_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_model.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
 import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
