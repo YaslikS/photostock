@@ -17,15 +17,15 @@ final class PhotoListModel extends BaseModel {
   final _screenState = ValueNotifier<ScreenListState>(
     const ScreenListStateLoading(),
   );
-  final _stateNewList = ValueNotifier<NewListState>(
-    const NewListStateInitial(),
+  final _stateNewList = ValueNotifier<UploadedListState>(
+    const UploadedListStateInitial(),
   );
 
   /// State of screen.
   ValueListenable<ScreenListState> get screenState => _screenState;
 
   /// State of new photos.
-  ValueListenable<NewListState> get stateNewList => _stateNewList;
+  ValueListenable<UploadedListState> get stateNewList => _stateNewList;
 
   /// {@macro photo_list_model.class}
   PhotoListModel({
@@ -42,7 +42,7 @@ final class PhotoListModel extends BaseModel {
 
   /// Load list of photos.
   Future<void> loadPhotos(int page) async {
-    _stateNewList.emit(const NewListStateLoading());
+    _stateNewList.emit(const UploadedListStateLoading());
 
     final result = await makeCall(() => _repository.getPhotos(page));
 
@@ -59,9 +59,9 @@ final class PhotoListModel extends BaseModel {
           _screenState.emit(ScreenListStateAccumulation(currentPhoto));
         }
 
-        _stateNewList.emit(const NewListStateLoaded());
+        _stateNewList.emit(const UploadedListStateLoaded());
       case ResultFailed():
-        _stateNewList.emit(const NewListStateError());
+        _stateNewList.emit(const UploadedListStateError());
     }
   }
 }

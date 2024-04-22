@@ -35,7 +35,7 @@ abstract interface class IPhotoListWM
   ValueListenable<ScreenListState> get screenState;
 
   /// State of new photos.
-  ValueListenable<NewListState> get stateNewList;
+  ValueListenable<UploadedListState> get stateNewList;
 
   /// for access the internal scrollController
   GlobalKey<NestedScrollViewState> get globalKey;
@@ -57,7 +57,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   ValueListenable<ScreenListState> get screenState => model.screenState;
 
   @override
-  ValueListenable<NewListState> get stateNewList => model.stateNewList;
+  ValueListenable<UploadedListState> get stateNewList => model.stateNewList;
 
   @override
   GlobalKey<NestedScrollViewState> get globalKey => _globalKey;

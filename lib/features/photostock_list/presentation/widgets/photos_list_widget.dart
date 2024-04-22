@@ -22,7 +22,7 @@ class PhotosListWidget extends StatefulWidget {
   final ScrollController scrollController;
 
   /// observing status of uploading new photos
-  final ValueListenable<NewListState> stateNewList;
+  final ValueListenable<UploadedListState> stateNewList;
 
   /// update list of photos
   final VoidCallback listNeedsUpdate;
@@ -57,10 +57,10 @@ class _PhotosListWidgetState extends State<PhotosListWidget> {
             },
           ),
         ),
-        ValueListenableBuilder<NewListState>(
+        ValueListenableBuilder<UploadedListState>(
           valueListenable: widget.stateNewList,
           builder: (_, state, __) => switch (state) {
-            NewListStateLoading _ => const Padding(
+            UploadedListStateLoading _ => const Padding(
                 padding: EdgeInsets.only(
                   bottom: AppSizes.double32,
                   top: AppSizes.double20,
@@ -78,9 +78,11 @@ class _PhotosListWidgetState extends State<PhotosListWidget> {
 
   /// listener for a Scroll Controller
   void _scrollListener() {
-    if (widget.scrollController.offset >=
-            widget.scrollController.positions.last.maxScrollExtent &&
-        !widget.scrollController.position.outOfRange) {
+    final currentScrollOffset = widget.scrollController.offset;
+    final maxRangeScrollController =
+        widget.scrollController.positions.last.maxScrollExtent;
+    final positionOutOfRange = widget.scrollController.position.outOfRange;
+    if (currentScrollOffset >= maxRangeScrollController && !positionOutOfRange) {
       widget.listNeedsUpdate();
     }
   }
