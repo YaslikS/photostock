@@ -41,6 +41,7 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
                 stateNewList: wm.stateNewList,
                 listNeedsUpdate: wm.listNeedsUpdate,
                 photosList: photos,
+                openDetailPhotoScreen: wm.openDetailPhotoScreen,
               ),
             ScreenListStateLoading _ => const Center(
                 child: CupertinoActivityIndicator(),

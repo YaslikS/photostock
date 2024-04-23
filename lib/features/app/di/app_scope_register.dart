@@ -1,6 +1,7 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/app_dio_configurator.dart';
 import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';

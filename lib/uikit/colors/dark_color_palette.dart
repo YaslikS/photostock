@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 ///
 /// App Dark colors palette.
 abstract class DarkColorPalette {
+
   /// Han Purple
   ///
   /// https://www.color-name.com/hex/6D38FF.
@@ -81,6 +82,9 @@ abstract class DarkColorPalette {
 ///
 /// App Light colors palette.
 abstract class ColorPalette {
+  /// Transparent AppBar
+  static const transparentAppBar = Color(0x00000000);
+
   /// Purple (X11)
   ///
   /// https://www.color-name.com/hex/9824F2.

@@ -14,8 +14,12 @@ class PhotoListItemWidget extends StatelessWidget {
   /// {@macro photos_list_widget.class}
   const PhotoListItemWidget({
     required this.photoItem,
+    required this.openDetailPhotoScreen,
     super.key,
   });
+
+  /// func that opens the details screen
+  final ValueChanged<PhotoItem> openDetailPhotoScreen;
 
   /// one item in List of photos
   final PhotoItem photoItem;
@@ -26,58 +30,61 @@ class PhotoListItemWidget extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     return GridTile(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizes.double12),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: BorderRadius.circular(AppSizes.double20),
-            boxShadow: [
-              BoxShadow(
-                color: HexColor.fromHex(photoItem.color),
-                blurRadius: AppSizes.double05,
-              ),
-            ],
-          ),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(AppSizes.double16),
-                child: Image.network(
-                  height: double.infinity,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  photoItem.urls.regular,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: BlurHash(hash: photoItem.blur_hash ?? ""),
-                    );
-                  },
+      child: InkResponse(
+        onTap: () => openDetailPhotoScreen(photoItem),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.double12),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colorScheme.background,
+              borderRadius: BorderRadius.circular(AppSizes.double20),
+              boxShadow: [
+                BoxShadow(
+                  color: HexColor.fromHex(photoItem.color),
+                  blurRadius: AppSizes.double05,
                 ),
-              ),
-              Positioned(
-                bottom: AppSizes.double12,
-                left: AppSizes.double12,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      photoItem.user.username,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: colorScheme.background,
-                      ),
-                    ),
-                    Text(
-                      '${photoItem.likes} ${l10n.photoItemLikes}',
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: colorScheme.background,
-                      ),
-                    ),
-                  ],
+              ],
+            ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSizes.double16),
+                  child: Image.network(
+                    height: double.infinity,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    photoItem.urls.regular,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: BlurHash(hash: photoItem.blur_hash ?? ''),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+                Positioned(
+                  bottom: AppSizes.double12,
+                  left: AppSizes.double12,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        photoItem.user.username,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: colorScheme.background,
+                        ),
+                      ),
+                      Text(
+                        '${photoItem.likes} ${l10n.photoItemLikes}',
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: colorScheme.background,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,9 +1,11 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
+import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/features/photostock_list/di/photo_list_scope.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_model.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
@@ -15,6 +17,7 @@ import 'package:provider/provider.dart';
 PhotoListWM photoListWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scope = context.read<IPhotoListScope>();
+  final appRouter = context.read<AppRouter>();
   final scaffoldMessenger = ScaffoldMessenger.of(context);
 
   return PhotoListWM(
@@ -22,6 +25,7 @@ PhotoListWM photoListWMFactory(BuildContext context) {
       repository: scope.repository,
       logWriter: appScope.logger,
     ),
+    router: appRouter,
     page: 1,
     scaffoldMessenger: scaffoldMessenger,
   );
@@ -43,6 +47,9 @@ abstract interface class IPhotoListWM
   /// controller controls the scroll of the list
   ScrollController get innerController;
 
+  /// Navigate to detail photo screen.
+  void openDetailPhotoScreen(PhotoItem photoItem);
+
   /// updating list
   void listNeedsUpdate();
 }
@@ -53,6 +60,8 @@ abstract interface class IPhotoListWM
 final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
     with ThemeWMMixin, LocalizationMixin
     implements IPhotoListWM {
+  final AppRouter _router;
+
   @override
   ValueListenable<ScreenListState> get screenState => model.screenState;
 
@@ -78,8 +87,10 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   PhotoListWM(
     super._model, {
     required this.page,
+    required AppRouter router,
     required ScaffoldMessengerState scaffoldMessenger,
-  }) : _scaffoldMessenger = scaffoldMessenger;
+  })  : _scaffoldMessenger = scaffoldMessenger,
+        _router = router;
 
   @override
   void listNeedsUpdate() {
@@ -91,6 +102,11 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
     model.loadPhotos(page++);
     _observerStateNewList();
     super.initWidgetModel();
+  }
+
+  @override
+  void openDetailPhotoScreen(PhotoItem photoItem) {
+    _router.push(PhotoDetailRouter(photoItem: photoItem));
   }
 
   void _observerStateNewList() {

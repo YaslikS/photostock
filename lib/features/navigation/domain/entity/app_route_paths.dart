@@ -9,6 +9,9 @@ abstract class AppRoutePaths {
   /// Path to debug screen.
   static const photoListPath = '/photo_list';
 
+  /// Path to detail screen.
+  static const detailPhotoPath = '/detail_photo';
+
   /// Path to debug screen.
   static const debugPath = '/debug';
 

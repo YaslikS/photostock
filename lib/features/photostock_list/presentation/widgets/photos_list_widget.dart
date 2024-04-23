@@ -14,9 +14,13 @@ class PhotosListWidget extends StatefulWidget {
     required this.stateNewList,
     required this.listNeedsUpdate,
     required this.photosList,
+    required this.openDetailPhotoScreen,
     required this.scrollController,
     super.key,
   });
+
+  /// func that opens the details screen
+  final ValueChanged<PhotoItem> openDetailPhotoScreen;
 
   /// controller controls the scroll of the list
   final ScrollController scrollController;
@@ -53,7 +57,10 @@ class _PhotosListWidgetState extends State<PhotosListWidget> {
               crossAxisCount: 2,
             ),
             itemBuilder: (context, i) {
-              return PhotoListItemWidget(photoItem: widget.photosList[i]);
+              return PhotoListItemWidget(
+                photoItem: widget.photosList[i],
+                openDetailPhotoScreen: widget.openDetailPhotoScreen,
+              );
             },
           ),
         ),

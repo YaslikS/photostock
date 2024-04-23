@@ -131,6 +131,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// The color of the shimmer.
   final Color shimmer;
 
+  /// The color for a transparent AppBar.
+  final Color transparentAppBar;
+
   /// Base light theme version.
   AppColorScheme.light()
       : primary = ColorPalette.purple,
@@ -160,7 +163,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         skeletonSecondary = ColorPalette.cultured,
         skeletonTertiary = ColorPalette.lightSilver,
         tetradicBackground = ColorPalette.lightGreen,
-        shimmer = ColorPalette.platinum;
+        shimmer = ColorPalette.platinum,
+        transparentAppBar = ColorPalette.transparentAppBar;
 
   /// Base dark theme version.
   AppColorScheme.dark()
@@ -191,7 +195,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         skeletonSecondary = DarkColorPalette.raisinBlack,
         skeletonTertiary = DarkColorPalette.lightSilver,
         tetradicBackground = DarkColorPalette.etonBlue,
-        shimmer = ColorPalette.platinum;
+        shimmer = ColorPalette.platinum,
+        transparentAppBar = ColorPalette.transparentAppBar;
 
   const AppColorScheme._({
     required this.primary,
@@ -222,6 +227,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.skeletonTertiary,
     required this.tetradicBackground,
     required this.shimmer,
+    required this.transparentAppBar,
   });
 
   @override
@@ -254,6 +260,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? skeletonTertiary,
     Color? tetradicBackground,
     Color? shimmer,
+    Color? transparentAppBar,
   }) {
     return AppColorScheme._(
       primary: primary ?? this.primary,
@@ -284,6 +291,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       skeletonTertiary: skeletonTertiary ?? this.skeletonTertiary,
       tetradicBackground: tetradicBackground ?? this.tetradicBackground,
       shimmer: shimmer ?? this.shimmer,
+      transparentAppBar: transparentAppBar ?? this.transparentAppBar,
     );
   }
 
@@ -308,14 +316,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       backgroundSecondary: Color.lerp(backgroundSecondary, other.backgroundSecondary, t)!,
       backgroundTertiary: Color.lerp(backgroundTertiary, other.backgroundTertiary, t)!,
       onBackground: Color.lerp(onBackground, other.onBackground, t)!,
-      onBackgroundSecondary: Color.lerp(onBackgroundSecondary, other.onBackgroundSecondary, t)!,
+      onBackgroundSecondary:
+          Color.lerp(onBackgroundSecondary, other.onBackgroundSecondary, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       dangerSecondary: Color.lerp(dangerSecondary, other.dangerSecondary, t)!,
       onDanger: Color.lerp(onDanger, other.onDanger, t)!,
       textField: Color.lerp(textField, other.textField, t)!,
       textFieldLabel: Color.lerp(textFieldLabel, other.textFieldLabel, t)!,
       textFieldHelper: Color.lerp(textFieldHelper, other.textFieldHelper, t)!,
-      frameTextFieldSecondary: Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
+      frameTextFieldSecondary:
+          Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
       inactive: Color.lerp(inactive, other.inactive, t)!,
       positive: Color.lerp(positive, other.positive, t)!,
       onPositive: Color.lerp(onPositive, other.onPositive, t)!,
@@ -325,9 +335,11 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       skeletonTertiary: Color.lerp(skeletonTertiary, other.skeletonTertiary, t)!,
       tetradicBackground: Color.lerp(tetradicBackground, other.tetradicBackground, t)!,
       shimmer: Color.lerp(shimmer, other.shimmer, t)!,
+      transparentAppBar: Color.lerp(transparentAppBar, other.transparentAppBar, t)!,
     );
   }
 
   /// Returns [AppColorScheme] from [context].
-  static AppColorScheme of(BuildContext context) => Theme.of(context).extension<AppColorScheme>()!;
+  static AppColorScheme of(BuildContext context) =>
+      Theme.of(context).extension<AppColorScheme>()!;
 }
