@@ -4,6 +4,8 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template detail_photo_screen.class}
 /// PhotoListScreen.
@@ -21,10 +23,12 @@ class DetailPhotoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colorScheme = AppColorScheme.of(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: colorScheme.transparentAppBar,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +45,7 @@ class DetailPhotoScreen extends StatelessWidget {
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Center(
-                    child: BlurHash(hash: photoItem.blur_hash),
+                    child: BlurHash(hash: photoItem.blur_hash ?? ''),
                   );
                 },
               ),
@@ -59,7 +63,7 @@ class DetailPhotoScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${photoItem.likes} likes',
+                  '${photoItem.likes} ${l10n.photoItemLikes}',
                   style: const TextStyle(
                     fontSize: AppSizes.double20,
                   ),

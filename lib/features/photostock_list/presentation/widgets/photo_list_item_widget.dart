@@ -3,6 +3,8 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/utils/extentions/hex_color_to_color.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template photos_list_widget.class}
 /// ItemListWidget.
@@ -16,13 +18,16 @@ class PhotoListItemWidget extends StatelessWidget {
     super.key,
   });
 
-  /// TODO: ОПИСАНИЕ
+  /// func that opens the details screen
   final ValueChanged<PhotoItem> openDetailPhotoScreen;
+
   /// one item in List of photos
   final PhotoItem photoItem;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = AppColorScheme.of(context);
+    final l10n = context.l10n;
     final theme = Theme.of(context);
     return GridTile(
       child: InkResponse(
@@ -31,12 +36,12 @@ class PhotoListItemWidget extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizes.double12),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.teal,
+              color: colorScheme.background,
               borderRadius: BorderRadius.circular(AppSizes.double20),
               boxShadow: [
                 BoxShadow(
                   color: HexColor.fromHex(photoItem.color),
-                  blurRadius: 5,
+                  blurRadius: AppSizes.double05,
                 ),
               ],
             ),
@@ -52,7 +57,7 @@ class PhotoListItemWidget extends StatelessWidget {
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
                       return Center(
-                        child: BlurHash(hash: photoItem.blur_hash),
+                        child: BlurHash(hash: photoItem.blur_hash ?? ''),
                       );
                     },
                   ),
@@ -66,13 +71,13 @@ class PhotoListItemWidget extends StatelessWidget {
                       Text(
                         photoItem.user.username,
                         style: theme.textTheme.labelLarge?.copyWith(
-                          color: Colors.white,
+                          color: colorScheme.background,
                         ),
                       ),
                       Text(
-                        '${photoItem.likes} likes',
+                        '${photoItem.likes} ${l10n.photoItemLikes}',
                         style: theme.textTheme.labelLarge?.copyWith(
-                          color: Colors.white,
+                          color: colorScheme.background,
                         ),
                       ),
                     ],

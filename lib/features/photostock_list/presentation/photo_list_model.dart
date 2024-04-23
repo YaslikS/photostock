@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/api/data/photo_item.dart';
 import 'package:flutter_template/common/utils/extentions/value_notifier_x.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
 import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/features/photostock_list/domain/repositories/i_photos_repository.dart';
+import 'package:flutter_template/features/photostock_list/presentation/uploaded_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_screen.dart';
-import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
+import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 
 /// {@template photo_list_model.class}
 /// [PhotoListModel] for [PhotoListScreen].
@@ -13,10 +15,18 @@ import 'package:flutter_template/features/photostock_list/presentation/photo_lis
 final class PhotoListModel extends BaseModel {
   final IPhotosRepository _repository;
 
-  final _state = ValueNotifier<PhotoListState>(const PhotoListStateInitial());
+  final _screenState = ValueNotifier<ScreenListState>(
+    const ScreenListStateLoading(),
+  );
+  final _stateNewList = ValueNotifier<UploadedListState>(
+    const UploadedListStateInitial(),
+  );
 
   /// State of screen.
-  ValueListenable<PhotoListState> get state => _state;
+  ValueListenable<ScreenListState> get screenState => _screenState;
+
+  /// State of new photos.
+  ValueListenable<UploadedListState> get stateNewList => _stateNewList;
 
   /// {@macro photo_list_model.class}
   PhotoListModel({
@@ -26,21 +36,33 @@ final class PhotoListModel extends BaseModel {
 
   @override
   void dispose() {
-    _state.dispose();
+    _screenState.dispose();
+    _stateNewList.dispose();
     super.dispose();
   }
 
   /// Load list of photos.
-  Future<void> loadPhotos() async {
-    _state.emit(const PhotoListStateLoading());
+  Future<void> loadPhotos(int page) async {
+    _stateNewList.emit(const UploadedListStateLoading());
 
-    final result = await makeCall(_repository.getPhotos);
+    final result = await makeCall(() => _repository.getPhotos(page));
 
     switch (result) {
       case ResultOk(:final data):
-        _state.emit(PhotoListStateLoaded(data));
+        final currentPhoto = data.photos;
+        if (_screenState.value is ScreenListStateAccumulation) {
+          final newPhoto = List<PhotoItem>.from(
+            (_screenState.value as ScreenListStateAccumulation).photos,
+          );
+          newPhoto.addAll(currentPhoto);
+          _screenState.emit(ScreenListStateAccumulation(newPhoto));
+        } else {
+          _screenState.emit(ScreenListStateAccumulation(currentPhoto));
+        }
+
+        _stateNewList.emit(const UploadedListStateLoaded());
       case ResultFailed():
-        _state.emit(const PhotoListStateError());
+        _stateNewList.emit(const UploadedListStateError());
     }
   }
 }

@@ -202,4 +202,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get featureExampleFailedLoadIpMessage => 'Не удалось загрузить IP-адрес';
+
+  @override
+  String get photoListTitle => 'Фото';
+
+  @override
+  String get photoListFailedLoadListPhotoMessage => 'Не удалось загрузить список фото';
+
+  @override
+  String get photoItemLikes => 'лайков';
 }

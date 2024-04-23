@@ -440,6 +440,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load IP address'**
   String get featureExampleFailedLoadIpMessage;
+
+  /// No description provided for @photoListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get photoListTitle;
+
+  /// No description provided for @photoListFailedLoadListPhotoMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload photo list'**
+  String get photoListFailedLoadListPhotoMessage;
+
+  /// No description provided for @photoItemLikes.
+  ///
+  /// In en, this message translates to:
+  /// **'likes'**
+  String get photoItemLikes;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

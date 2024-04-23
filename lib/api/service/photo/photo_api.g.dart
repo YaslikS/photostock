@@ -19,9 +19,15 @@ class _PhotoApi implements PhotoApi {
   String? baseUrl;
 
   @override
-  Future<List<PhotoItem>> getPhoto([String format = 'json']) async {
+  Future<List<PhotoItem>> getPhoto([
+    int page = 1,
+    String format = 'json',
+  ]) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'format': format};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'format': format,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =

@@ -1,7 +1,8 @@
 import 'package:elementary/elementary.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/photostock_list/presentation/photo_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/photo_list_wm.dart';
+import 'package:flutter_template/features/photostock_list/presentation/screen_list_state.dart';
 import 'package:flutter_template/features/photostock_list/presentation/widgets/photos_list_widget.dart';
 
 /// {@template photo_list_screen.class}
@@ -11,31 +12,42 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   /// {@macro photo_list_screen.class}
   const PhotoListScreen({
     super.key,
-    WidgetModelFactory wmFactory = defaultFeatureExampleWMFactory,
+    WidgetModelFactory wmFactory = photoListWMFactory,
   }) : super(wmFactory);
 
   @override
   Widget build(IPhotoListWM wm) {
-    const PhotoListStateInitial();
-
     return Scaffold(
-      body: ValueListenableBuilder<PhotoListState>(
-        valueListenable: wm.state,
-        builder: (_, state, __) => switch (state) {
-          PhotoListStateInitial _ => const Center(
-              child: SizedBox.shrink(),
-            ),
-          PhotoListStateLoading _ => const Center(
-              child: CircularProgressIndicator(),
-            ),
-          PhotoListStateLoaded(:final photoEntity) => PhotosListWidget(
-              photosList: photoEntity.photos,
-              openDetailPhotoScreen: wm.openDetailPhotoScreen,
-            ),
-          PhotoListStateError _ => Text(
-              wm.l10n.featureExampleFailedLoadIpMessage,
-            ),
+      body: NestedScrollView(
+        key: wm.globalKey,
+        headerSliverBuilder: (context, isScrolled) {
+          return [
+            CupertinoSliverNavigationBar(
+              backgroundColor: wm.colorScheme.background.withAlpha(200),
+              largeTitle: Text(wm.l10n.photoListTitle),
+              border: Border(
+                bottom: BorderSide(
+                  color: wm.colorScheme.background,
+                ),
+              ),
+            )
+          ];
         },
+        body: ValueListenableBuilder<ScreenListState>(
+          valueListenable: wm.screenState,
+          builder: (_, state, __) => switch (state) {
+            ScreenListStateAccumulation(:final photos) => PhotosListWidget(
+                scrollController: wm.innerController,
+                stateNewList: wm.stateNewList,
+                listNeedsUpdate: wm.listNeedsUpdate,
+                photosList: photos,
+                openDetailPhotoScreen: wm.openDetailPhotoScreen,
+              ),
+            ScreenListStateLoading _ => const Center(
+                child: CupertinoActivityIndicator(),
+              ),
+          },
+        ),
       ),
     );
   }
